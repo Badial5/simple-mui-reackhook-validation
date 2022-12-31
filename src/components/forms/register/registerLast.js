@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, Radio, RadioGroup, Stack, Switch, TextField, Typography } from '@mui/material'
+import { Box, Button, CssBaseline, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, Grid, Radio, RadioGroup, Stack, Switch, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 
 const RegisterLast = () => {
@@ -31,13 +31,16 @@ const RegisterLast = () => {
 
 
   return (
+    <Grid container component="main" sx={{height: "100vh", maxWidth: "100vw", display: "flex", justifyContent: "center"}}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} >
     <Box sx={{display: "flex", justifyContent: "center", 
-    maxWidth: 600, height: 600,  marginTop: 7}}>
+       marginTop: 0}}>
 
           
-        <Box sx={{ display: "flex", flexDirection: "column", width: 500, height: "700"}}>
+        <Box sx={{ display: "flex", flexDirection: "column", }}>
           
-          <Typography marginY={10} textAlign="center"  
+          <Typography marginY={3} textAlign="center"  
           sx={{backgroundColor: "#cecece", borderRadius: 10, }} >
             Material UI with React Hook Form Validation
           </Typography>
@@ -48,7 +51,7 @@ const RegisterLast = () => {
        
        <Stack direction={"row"} spacing={2}>
           <TextField sx={{marginBottom: 3}}
-          error={Boolean(errors.firstName)}
+          error={Boolean(!!errors.firstName)}
           id="outlined-firstName-helper-text"
           label="FirstName"
           {...register("firstName", {required: "Firstname is required"})}
@@ -57,8 +60,8 @@ const RegisterLast = () => {
 
           <br /> 
           <TextField sx={{marginBottom: 3}}
-          error={Boolean(errors.firstName)}
-          id="outlined-firstName-helper-text"
+          error={Boolean(!!errors.lastName)}
+          id="outlined-lastName-helper-text"
           label="LastName"
           {...register("lastName", {required: "Lastname is required"})}
           helperText={errors.lastName?.message}
@@ -75,7 +78,7 @@ const RegisterLast = () => {
     
           <TextField type="email" 
           sx={{marginBottom: 3}}
-          error={Boolean(errors.email)}
+          error={Boolean(!!errors.email)}
           id="outlined-email-helper-text"
           label="Email"
           {...register("email", {required: "Email is required" ,
@@ -90,7 +93,7 @@ const RegisterLast = () => {
 
         <TextField type="tel" 
           sx={{marginBottom: 3}}
-          error={Boolean(errors.phone)}
+          error={Boolean(!!errors.phone)}
           id="outlined-phone-helper-text"
           label="Phone"
           {...register("phone", {required: "Phone is required" ,
@@ -121,8 +124,8 @@ const RegisterLast = () => {
           
     <TextField type="password"
           sx={{marginBottom: 3}}
-          error={Boolean(errors.password)}
-          id="outlined-firstName-helper-text"
+          error={Boolean(!!errors.password)}
+          id="outlined-password-helper-text"
           label="Password"
           {...register("password", {required: {
             value: true,
@@ -141,8 +144,8 @@ const RegisterLast = () => {
         
           <TextField type="password"
           sx={{marginBottom: 3}}
-          error={Boolean(errors.password2)}
-          id="outlined-firstName-helper-text"
+          error={Boolean(!!errors.password2)}
+          id="outlined-password2-helper-text"
           label="Confirm Password"
           {...register("password2", {validate: value => password === value || "Password  do not match"})}
           helperText={errors.password2?.message}
@@ -152,7 +155,7 @@ const RegisterLast = () => {
           {/* Radio check: Form Control or Form Group */}
             <br />
 
-      <FormControl error={Boolean(errors.gender)}>
+      <FormControl error={Boolean(!!errors.gender)}>
       <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
       <RadioGroup
         row
@@ -182,7 +185,7 @@ const RegisterLast = () => {
     <br />
 
 
-    <FormGroup error={Boolean(errors.tnc)}>
+    <FormGroup error={Boolean(!!errors.tnc)}>
   <FormControlLabel 
   control={<Switch {...register("tnc", {required: "You need to accept our Terms and Condition"})} />} 
   label="Agree to our Terms and Condition" />
@@ -216,6 +219,10 @@ const RegisterLast = () => {
 
 
     </Box>
+
+    </Grid> 
+
+    </Grid>
   )
 }
 
