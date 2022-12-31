@@ -3,17 +3,24 @@ import { useForm } from 'react-hook-form'
 
 const RegisterLast = () => {
   const {handleSubmit, register, formState: {errors},
-  reset } = useForm({
+  reset, watch } = useForm({
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
+      password2: '',
       gender: '',
       tnc: ''
 
     }
    })
+
+   //in order to validate password with password 
+   // do not match, You need to watch the value 
+   //if they match or not
+
+   const password = watch("password", "")
 
    const onSubmit = (data) => {
     console.log(data)
@@ -61,8 +68,8 @@ const RegisterLast = () => {
 
           <br /> 
 
-    <Stack direction={"row"} spacing={2}>
-          <TextField type="email"
+    <Box display={"flex"} justifyContent={"center"}>
+          <TextField type="email" 
           sx={{marginBottom: 3}}
           error={Boolean(errors.email)}
           id="outlined-email-helper-text"
@@ -75,15 +82,30 @@ const RegisterLast = () => {
           helperText={errors.email?.message}
         />
 
+    </Box>
 
-        <br /> 
-          <TextField type="password"
+        <br />
+
+    <Stack direction={"row"} spacing={2}>
+          
+    <TextField type="password"
           sx={{marginBottom: 3}}
           error={Boolean(errors.password)}
           id="outlined-firstName-helper-text"
           label="Password"
           {...register("password", {required: "Password is required"})}
           helperText={errors.password?.message}
+        />
+
+
+        
+          <TextField type="password"
+          sx={{marginBottom: 3}}
+          error={Boolean(errors.password2)}
+          id="outlined-firstName-helper-text"
+          label="Confirm Password"
+          {...register("password2", {validate: value => password === value || "Password  do not match"})}
+          helperText={errors.password2?.message}
         />
     </Stack>
 
