@@ -8,6 +8,7 @@ const RegisterLast = () => {
       firstName: '',
       lastName: '',
       email: '',
+      phone: '',
       password: '',
       password2: '',
       gender: '',
@@ -68,7 +69,10 @@ const RegisterLast = () => {
 
           <br /> 
 
-    <Box display={"flex"} justifyContent={"center"}>
+    {/* <Box display={"flex"} justifyContent={"center"}> */}
+
+    <Stack direction="row" spacing={2} >
+    
           <TextField type="email" 
           sx={{marginBottom: 3}}
           error={Boolean(errors.email)}
@@ -82,7 +86,33 @@ const RegisterLast = () => {
           helperText={errors.email?.message}
         />
 
-    </Box>
+
+        <TextField type="tel" 
+          sx={{marginBottom: 3}}
+          error={Boolean(errors.phone)}
+          id="outlined-phone-helper-text"
+          label="Phone"
+          {...register("phone", {required: "Phone is required" ,
+          maxLength: {
+            value: 10,
+            message: "Must be 10 digits"
+           },
+          
+           minLength: {
+            value: 10,
+            message: "The minimum digits must be 10"
+           }
+          
+          })}
+          helperText={errors.phone?.message}
+        />
+
+        
+  
+  </Stack>
+
+
+    {/* </Box> */}
 
         <br />
 
@@ -93,7 +123,16 @@ const RegisterLast = () => {
           error={Boolean(errors.password)}
           id="outlined-firstName-helper-text"
           label="Password"
-          {...register("password", {required: "Password is required"})}
+          {...register("password", {required: {
+            value: true,
+            message: "Password is required"
+          },
+          minLength: {
+            value: 8, 
+            message: "The Minimum length must be 8 or more"
+          }
+        
+        })}
           helperText={errors.password?.message}
         />
 
